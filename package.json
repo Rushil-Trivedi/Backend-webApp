@@ -1,0 +1,17 @@
+{
+  "name": "video_sharing_website",
+  "version": "1.0.0",
+  "description": "A backend project",
+  "keywords": [
+    "javascript",
+    "backend",
+    "JS"
+  ],
+  "license": "ISC",
+  "author": "Rushil Trivedi",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
