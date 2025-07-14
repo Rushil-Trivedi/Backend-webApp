@@ -1,11 +1,12 @@
 /* Method: 2: Using Promises  */
 
 const asyncHandler = (requestHandler) => {
-  (req, res, next) => {
+  return (req, res, next) => {
     Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err));
   };
 };
 
+export { asyncHandler };
 /* 
 Method: 1: Using try catch.
 note*: Here we are creating a wrapper function which can be used anywhere we want.
