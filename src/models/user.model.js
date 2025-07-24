@@ -51,7 +51,7 @@ const userSchema = new Schema(
 
 // here the hooks are used for middleware from the mongoose. "pre" is a hook.
 userSchema.pre("save", async function (next) {
-  if (this.isModified("password")) return next();
+  if (!this.isModified("password")) return next();
 
   this.password = await bcrypt.hash(this.password, 10);
   next();

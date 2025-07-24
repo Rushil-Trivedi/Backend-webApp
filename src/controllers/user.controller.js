@@ -3,10 +3,11 @@ import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/FileUpload.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import bcrypt from "bcrypt";
 
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
-    const user = User.findById(userId);
+    const user = await User.findById(userId);
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
 
@@ -134,7 +135,12 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(404, "User does not exist.");
   }
 
+  console.log("Plain:", password);
+  console.log("Hashed:", user.password);
+
   const isPasswordValid = await user.isPasswordCorrect(password);
+  // const isPasswordValid = await bcrypt.compare(password, user.password);
+  console.log("Valid:", isPasswordValid);
 
   if (!isPasswordValid) {
     throw new ApiError(404, "incorrect password.");
